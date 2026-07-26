@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EdgeFlex — The edge data center platform for the inference era</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23eef3ee'/%3E%3Ctext x='7' y='46' font-family='Segoe UI,sans-serif' font-size='36' font-weight='600' fill='%230e2417'%3EE%3C/text%3E%3Ctext x='30' y='46' font-family='Segoe UI,sans-serif' font-size='36' font-weight='600' font-style='italic' fill='%23c97245'%3EF%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="description" content="EdgeFlex acquires and develops edge data centers — powered, metro-proximate sites for AI inference and enterprise workloads.">
     <style>
         :root {
             --forest: #0a1a12;
@@ -948,8 +951,80 @@
         }
 
         @media (max-width: 640px) {
-            .nav-links li:nth-child(n+4) { display: none; }
             .hero-aside { margin-left: 0; }
+        }
+
+        /* ===== Mobile navigation ===== */
+        .nav-toggle {
+            display: none;
+            width: 44px;
+            height: 38px;
+            background: none;
+            border: 1px solid var(--line-2);
+            position: relative;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .nav-toggle span {
+            position: absolute;
+            left: 12px;
+            right: 12px;
+            height: 1.5px;
+            background: var(--paper);
+            transition: transform 0.3s var(--ease-out);
+        }
+
+        .nav-toggle span:first-child { top: 14px; }
+        .nav-toggle span:last-child { bottom: 14px; }
+
+        .nav.open .nav-toggle span:first-child { transform: translateY(4px) rotate(45deg); }
+        .nav.open .nav-toggle span:last-child { transform: translateY(-4.5px) rotate(-45deg); }
+
+        @media (max-width: 860px) {
+            .nav-toggle { display: block; }
+
+            .nav-links {
+                position: fixed;
+                top: var(--nav-h);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                flex-direction: column;
+                gap: 0;
+                background: rgba(5, 14, 8, 0.97);
+                backdrop-filter: blur(12px);
+                padding: 20px var(--wrap-pad);
+                opacity: 0;
+                transform: translateY(-8px);
+                pointer-events: none;
+                transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+            }
+
+            .nav.open .nav-links {
+                opacity: 1;
+                transform: none;
+                pointer-events: auto;
+            }
+
+            .nav.open {
+                background: rgba(5, 14, 8, 0.97);
+                border-bottom: 1px solid var(--line);
+            }
+
+            .nav-links li { border-bottom: 1px solid var(--line); }
+
+            .nav-links a {
+                display: block;
+                padding: 18px 0;
+                font-size: 14px;
+            }
+
+            .nav-links a.nav-contact {
+                border: 0;
+                padding: 18px 0;
+                color: var(--copper-bright);
+            }
         }
     </style>
 </head>
@@ -967,6 +1042,9 @@
                 <line x1="78" y1="34" x2="96" y2="34" stroke="#e29255" stroke-width="1.6"/>
             </svg>
         </a>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span>
+        </button>
         <ul class="nav-links">
             <li><a href="#overview">Overview</a></li>
             <li><a href="#shift">The Shift</a></li>
@@ -1003,10 +1081,10 @@
 
             <h2 class="statement rt">Training built the hyperscale era. Inference is building the edge era.</h2>
 
-            <p class="body-copy reveal"><b>EdgeFlex acquires and develops edge data centers</b> — powered brownfields, lit shells, and substation-adjacent land in metro markets — delivered as 25–75 MW facilities for AI inference and enterprise workloads. The founding team brings $40B+ of transaction experience across digital infrastructure and 22 executed transactions spanning data centers, powered land, equity, and debt. Deep expertise in data center development, principal investing, power trading, and digital infrastructure capital markets informs site selection, underwriting, procurement, and entitlements. The platform controls a 500+ MW active development pipeline across every major U.S. power market.</p>
-            <p class="body-copy reveal d1">Every prompt, agent step, API call, and token served runs a trained model. Usage turns directly into <b>recurring compute demand</b> — and that demand compounds with adoption. Training was an episodic capital event; inference is the model in use, every day, everywhere.</p>
-            <p class="body-copy reveal d2">Agentic AI, real-time voice, autonomy, and industrial automation demand sub-10ms responses that centralized hyperscale campuses cannot deliver. Serving tokens near users cuts backhaul and networking cost, while data-residency mandates in 40+ countries push workloads into regional and metro-edge facilities.</p>
-            <p class="body-copy reveal d3">EdgeFlex targets 25–75 MW metro-edge sites with power in hand — brownfields, powered shells, and land adjacent to live substations. Modular tranches are added against demand, not years ahead of it.</p>
+            <p class="body-copy reveal"><b>EdgeFlex targets 25–75 MW metro-edge sites with power in hand</b> — brownfields, powered shells, and land adjacent to live substations. Modular tranches are added against demand, not years ahead of it.</p>
+            <p class="body-copy reveal d1">The founding team brings $40B+ of transaction experience across digital infrastructure and 22 executed transactions spanning data centers, powered land, equity, and debt. Deep expertise in data center development, principal investing, power trading, and digital infrastructure capital markets informs site selection, underwriting, procurement, and entitlements. The platform controls a 500+ MW active development pipeline across every major U.S. power market.</p>
+            <p class="body-copy reveal d2">Every prompt, agent step, API call, and token served runs a trained model. Usage turns directly into <b>recurring compute demand</b> — and that demand compounds with adoption. Training was an episodic capital event; inference is the model in use, every day, everywhere.</p>
+            <p class="body-copy reveal d3">Agentic AI, real-time voice, autonomy, and industrial automation demand sub-10ms responses that centralized hyperscale campuses cannot deliver. Serving tokens near users cuts backhaul and networking cost, while data-residency mandates in 40+ countries push workloads into regional and metro-edge facilities.</p>
 
             <p class="kicker reveal d3">The workload has shifted. <span class="accent">Latency is the product.</span></p>
         </section>
@@ -1307,6 +1385,22 @@
         };
         addEventListener('scroll', onScroll, { passive: true });
         addEventListener('resize', sweep, { passive: true });
+
+        // Mobile menu toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        if (navToggle) {
+            navToggle.addEventListener('click', () => {
+                const open = nav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', open);
+                navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            });
+            document.querySelectorAll('.nav-links a').forEach(a => {
+                a.addEventListener('click', () => {
+                    nav.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
 
         // Hero reveals fire on load; run an initial sweep too
         window.addEventListener('load', () => {
