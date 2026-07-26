@@ -1230,7 +1230,6 @@
 
             <div class="map-wrap reveal d1">
                 <svg id="world-map" viewBox="0 0 1000 650" role="img" aria-label="North America map showing EdgeFlex pipeline sites"></svg>
-                <div class="map-tooltip" id="map-tooltip" hidden></div>
                 <div class="map-legend">
                     <span class="legend-item"><span class="legend-dot"></span>Active developments</span>
                 </div>
@@ -1512,20 +1511,6 @@
                 { name: 'Texas', lat: 29.5, lon: -95.0, note: 'Substation-adjacent greenfield' }
             ];
 
-            const wrap = svg.closest('.map-wrap');
-            const tip = document.getElementById('map-tooltip');
-
-            const showTip = (site, cx, cy) => {
-                tip.innerHTML = '<div class="tt-name">' + site.name + '</div>';
-                const sr = svg.getBoundingClientRect();
-                const wr = wrap.getBoundingClientRect();
-                const px = sr.left - wr.left + cx / W * sr.width;
-                const py = sr.top - wr.top + cy / H * sr.height;
-                tip.style.left = Math.max(110, Math.min(px, wr.width - 110)) + 'px';
-                tip.style.top = py + 'px';
-                tip.hidden = false;
-            };
-
             SITES.forEach((site, idx) => {
                 const [cx, cy] = project(site.lat, site.lon);
 
@@ -1536,25 +1521,13 @@
                 halo.style.animationDelay = (idx * 0.3) + 's';
                 svg.appendChild(halo);
 
-                const hit = document.createElementNS(NS, 'circle');
-                hit.setAttribute('cx', cx); hit.setAttribute('cy', cy);
-                hit.setAttribute('r', 16);
-                hit.setAttribute('class', 'site-hit');
-                svg.appendChild(hit);
-
                 const dot = document.createElementNS(NS, 'circle');
                 dot.setAttribute('cx', cx); dot.setAttribute('cy', cy);
                 dot.setAttribute('r', 4.5);
                 dot.setAttribute('class', 'site-dot');
                 dot.style.pointerEvents = 'none';
                 svg.appendChild(dot);
-
-                hit.addEventListener('mouseenter', () => showTip(site, cx, cy));
-                hit.addEventListener('mouseleave', () => { tip.hidden = true; });
-                hit.addEventListener('click', () => showTip(site, cx, cy));
             });
-
-            svg.addEventListener('mouseleave', () => { tip.hidden = true; });
 
             // Scale-style auto-scrolling site cards (content duplicated for seamless loop)
             const marquee = document.getElementById('site-marquee');
