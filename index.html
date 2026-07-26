@@ -991,26 +991,29 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
+                height: calc(100vh - var(--nav-h));
+                height: calc(100dvh - var(--nav-h));
                 flex-direction: column;
                 gap: 0;
-                background: #000;
+                background: #000 !important;
                 padding: 20px var(--wrap-pad);
+                display: none;
                 opacity: 0;
-                transform: translateY(-8px);
-                pointer-events: none;
-                transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+                z-index: 99;
             }
 
             .nav.open .nav-links {
+                display: flex;
                 opacity: 1;
-                transform: none;
-                pointer-events: auto;
             }
 
             .nav.open {
-                background: #000;
+                background: #000 !important;
+                backdrop-filter: none;
                 border-bottom: 1px solid var(--line);
             }
+
+            body.menu-open { overflow: hidden; }
 
             .nav-links li { border-bottom: 1px solid var(--line); }
 
@@ -1390,12 +1393,14 @@
         if (navToggle) {
             navToggle.addEventListener('click', () => {
                 const open = nav.classList.toggle('open');
+                document.body.classList.toggle('menu-open', open);
                 navToggle.setAttribute('aria-expanded', open);
                 navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
             });
             document.querySelectorAll('.nav-links a').forEach(a => {
                 a.addEventListener('click', () => {
                     nav.classList.remove('open');
+                    document.body.classList.remove('menu-open');
                     navToggle.setAttribute('aria-expanded', 'false');
                 });
             });
