@@ -1495,18 +1495,48 @@
             }
             svg.appendChild(dots);
 
-            // Anonymized: broad region only
+            // Anonymized: broad region only, coords blurred to a half-degree grid.
+            // Mirrors the pipeline tracker's active set (status Active + live deals).
             const SITES = [
-                { name: 'Great Lakes', lat: 41.5, lon: -83.5, note: 'Powered brownfield' },
-                { name: 'Great Lakes', lat: 41.0, lon: -81.5, note: 'Income-producing brownfield' },
+                { name: 'Great Lakes', lat: 40.0, lon: -83.5, note: 'Entitled greenfield' },
+                { name: 'Great Lakes', lat: 42.5, lon: -83.5, note: 'Powered shell' },
+                { name: 'Gulf South', lat: 32.5, lon: -94.0, note: 'Existing data center' },
+                { name: 'Gulf South', lat: 32.5, lon: -92.0, note: 'Greenfield' },
+                { name: 'Mid-Atlantic', lat: 40.5, lon: -79.5, note: 'Entitled industrial park' },
+                { name: 'Mid-Atlantic', lat: 40.5, lon: -80.5, note: 'Entitled industrial park' },
+                { name: 'Mid-Atlantic', lat: 39.0, lon: -77.0, note: 'Existing data center' },
                 { name: 'Mid-Atlantic', lat: 40.5, lon: -75.5, note: 'Lit powered shell' },
-                { name: 'Midwest', lat: 39.5, lon: -94.5, note: 'Hyperscale-adjacent land' },
-                { name: 'Midwest', lat: 37.5, lon: -90.5, note: 'Brownfield' },
-                { name: 'Southeast', lat: 36.5, lon: -80.5, note: 'Energized campus' },
-                { name: 'Southeast', lat: 36.5, lon: -77.5, note: 'Certified industrial park' },
-                { name: 'Southern Plains', lat: 34.0, lon: -96.5, note: 'Substation-adjacent greenfield' },
-                { name: 'Texas', lat: 32.5, lon: -97.5, note: 'Substation-adjacent greenfield' },
-                { name: 'Texas', lat: 29.5, lon: -95.0, note: 'Substation-adjacent greenfield' }
+                { name: 'Midwest', lat: 40.0, lon: -86.0, note: 'Existing data center' },
+                { name: 'Midwest', lat: 41.5, lon: -94.0, note: 'Powered land' },
+                { name: 'Midwest', lat: 41.0, lon: -91.0, note: 'Powered shell' },
+                { name: 'Mountain West', lat: 39.0, lon: -104.5, note: 'Greenfield' },
+                { name: 'Mountain West', lat: 39.5, lon: -119.0, note: 'Greenfield' },
+                { name: 'Multi-Region', lat: 45.0, lon: -75.0, note: 'Legacy industrial portfolio' },
+                { name: 'Northern California', lat: 37.5, lon: -122.5, note: 'Behind-the-meter campus' },
+                { name: 'Northern Plains', lat: 44.5, lon: -100.5, note: 'Energized greenfield' },
+                { name: 'Northern Plains', lat: 43.5, lon: -96.5, note: 'Powered land' },
+                { name: 'Southeast', lat: 33.5, lon: -81.0, note: 'Greenfield' },
+                { name: 'Southeast', lat: 31.0, lon: -81.5, note: 'Industrial brownfield' },
+                { name: 'Southeast', lat: 32.0, lon: -81.0, note: 'Industrial brownfield' },
+                { name: 'Southeast', lat: 33.5, lon: -80.0, note: 'Power-ready shell' },
+                { name: 'Southeast', lat: 29.5, lon: -83.0, note: 'Powered land' },
+                { name: 'Southeast', lat: 33.0, lon: -84.5, note: 'Powered land' },
+                { name: 'Southeast', lat: 33.5, lon: -82.0, note: 'Powered land' },
+                { name: 'Southeast', lat: 35.0, lon: -81.0, note: 'Powered land' },
+                { name: 'Southern Plains', lat: 34.5, lon: -96.0, note: 'Powered land' },
+                { name: 'Southwest', lat: 33.0, lon: -111.5, note: 'Powered land' },
+                { name: 'Texas', lat: 30.0, lon: -98.0, note: 'Greenfield' },
+                { name: 'Texas', lat: 31.5, lon: -99.5, note: 'Greenfield' },
+                { name: 'Texas', lat: 32.5, lon: -97.5, note: 'Greenfield' },
+                { name: 'Texas', lat: 32.5, lon: -99.5, note: 'Greenfield' },
+                { name: 'Texas', lat: 33.0, lon: -97.0, note: 'Greenfield' },
+                { name: 'Texas', lat: 30.0, lon: -97.7, note: 'Powered campus' },
+                { name: 'Texas', lat: 29.5, lon: -98.5, note: 'Powered land' },
+                { name: 'Texas', lat: 30.0, lon: -95.5, note: 'Powered land' },
+                { name: 'Texas', lat: 33.0, lon: -100.0, note: 'Powered land' },
+                { name: 'Texas', lat: 35.0, lon: -102.0, note: 'Powered land' },
+                { name: 'Texas', lat: 32.5, lon: -97.2, note: 'Powered shell' },
+                { name: 'Upper Midwest', lat: 44.5, lon: -90.0, note: 'Industrial brownfield' }
             ];
 
             SITES.forEach((site, idx) => {
@@ -1532,6 +1562,7 @@
             if (marquee) {
                 const track = document.createElement('div');
                 track.className = 'marquee-track';
+                track.style.animationDuration = (SITES.length * 5.5) + 's';
                 [...SITES, ...SITES].forEach(site => {
                     const card = document.createElement('div');
                     card.className = 'site-card';
