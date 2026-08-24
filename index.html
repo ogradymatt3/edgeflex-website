@@ -3,36 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#E9F3FC">
-    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#050608">
+    <meta name="color-scheme" content="dark">
     <title>EdgeFlex — The edge data center platform for the inference era</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="description" content="EdgeFlex acquires and develops edge data centers — powered, metro-proximate sites for AI inference and enterprise workloads.">
     <style>
-        /* EdgeFlex - editorial system on the light blue ground.
-           E9F3FC is the palette study's E4F2F1 swatch taken toward white and then
-           rotated well off the mint into blue; ink, body and muted carry a trace of
-           that same hue rather than being flat neutrals. The orange splits into
-           three roles because F79646 measures 1.9:1 here and cannot carry words:
-           --accent is fills only, --accent-deep is 3.6:1 so it is display figures
-           only, --accent-ink is 5.2:1 and carries accent text at any size.
-           Measured against E9F3FC; --muted also clears 4.5:1 on the DAEAF5 footer. */
+        /* EdgeFlex - dark editorial system.
+           Ground and typographic discipline in the Hut 8 register; the accent stays
+           EdgeFlex orange (deck + LOI house colour), never a borrowed acid green. */
         :root {
-            --bg: #e9f3fc;
-            --bg-2: #daeaf5;
-            --ink: #0f293a;
-            --body: #3b576a;
-            --muted: #4b6376;
-            --line: rgba(15, 41, 58, 0.15);
-            --line-2: rgba(15, 41, 58, 0.32);
+            --bg: #050608;
+            --bg-2: #0a0c0f;
+            --ink: #ededed;
+            --body: #b0b0b0;
+            --muted: #979797;
+            --line: rgba(255, 255, 255, 0.11);
+            --line-2: rgba(255, 255, 255, 0.24);
             --accent: #f79646;
-            --accent-deep: #c26214;
-            --accent-ink: #a8481a;
+            --accent-ink: #f79646;
             --accent-lt: #e29255;
-            --accent-dim: rgba(168, 72, 26, 0.30);
-            --card: rgba(255, 255, 255, 0.66);
+            --accent-dim: rgba(247, 150, 70, 0.22);
+            --card: rgba(255, 255, 255, 0.028);
             --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
             --ease-soft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --wrap-pad: clamp(22px, 5.2vw, 88px);
@@ -60,9 +54,9 @@
         }
         body.menu-open { overflow: hidden; }
 
-        ::selection { background: var(--accent); color: #1a1a1a; }
+        ::selection { background: var(--accent); color: #0a0a0a; }
 
-        /* Ambient ground: the mint lifted in the centre and settled at the edges.
+        /* Ambient ground: a slow warm bloom off the top-left over near-black.
            Pointer-transparent and behind everything. */
         .silk-bg {
             position: fixed;
@@ -70,20 +64,18 @@
             z-index: 0;
             pointer-events: none;
             background:
-                radial-gradient(78% 56% at 54% 46%, #f5fafe 0%, #e9f3fc 55%, #daeaf5 100%);
+                radial-gradient(78% 56% at 54% 46%, #2a2e33 0%, #16181c 55%, #050608 100%);
         }
 
-        /* Two overlays finish the ground: a warm bloom so the cool tint never reads
-           as clinical, and a soft settle in the corners so the centre lifts. The
-           bloom is held down at 0.042 - on the old mint it read as warmth, on blue
-           anything heavier reads as a beige stain. */
+        /* Two overlays finish the ground: a warm bloom that keeps it from reading as
+           neutral grey, and a vignette that pulls the corners down so the centre lifts. */
         .silk-bg::after {
             content: "";
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(60% 45% at 50% 42%, rgba(247, 150, 70, 0.042) 0%, rgba(247, 150, 70, 0) 70%),
-                radial-gradient(115% 100% at 12% 82%, rgba(15, 41, 58, 0.10) 0%, rgba(15, 41, 58, 0.045) 38%, rgba(15, 41, 58, 0) 78%);
+                radial-gradient(60% 45% at 50% 42%, rgba(247, 150, 70, 0.055) 0%, rgba(247, 150, 70, 0) 70%),
+                radial-gradient(115% 100% at 12% 82%, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.20) 38%, rgba(0, 0, 0, 0) 78%);
         }
 
         /* Generated motion: a lattice with current running through it. Behind
@@ -107,7 +99,7 @@
                         backdrop-filter 0.4s var(--ease-soft);
         }
         .nav.scrolled {
-            background: rgba(233, 243, 252, 0.80);
+            background: rgba(8, 9, 12, 0.72);
             backdrop-filter: blur(18px) saturate(140%);
             -webkit-backdrop-filter: blur(18px) saturate(140%);
             border-bottom-color: var(--line);
@@ -154,7 +146,7 @@
         .nav-links .nav-contact:hover {
             background: var(--accent);
             border-color: var(--accent);
-            color: #1a1a1a;
+            color: #0a0a0a;
         }
 
         .nav-toggle {
@@ -356,7 +348,7 @@
             line-height: 0.94;
             font-weight: 500;
             letter-spacing: -0.045em;
-            color: var(--accent-deep);
+            color: var(--accent);
         }
         .stat-figure small {
             font-size: 0.30em;
@@ -436,44 +428,34 @@
 
         /* --------------------------------------------------------- flagship card */
         .platform-grid { margin-bottom: clamp(30px, 4.6vh, 58px); }
-
-        /* A white sheet lifted off the mint, not a tint sitting on a tint. The
-           shadow is mixed from the ground's own ink so the lift stays inside the
-           palette instead of going neutral grey. */
         .platform-card {
+            background: rgba(255, 255, 255, 0.030);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: clamp(24px, 3.2vw, 44px);
             position: relative;
-            background: #fff;
-            border: 1px solid rgba(15, 41, 58, 0.10);
-            border-radius: 6px;
-            padding: clamp(26px, 3.4vw, 46px);
-            padding-left: clamp(29px, 3.4vw, 49px);
             overflow: hidden;
-            box-shadow: 0 1px 2px rgba(15, 41, 58, 0.05),
-                        0 14px 36px -16px rgba(15, 41, 58, 0.22);
-            transition: box-shadow 0.42s var(--ease-soft), transform 0.42s var(--ease-soft);
+            transition: border-color 0.4s var(--ease-soft), background 0.4s var(--ease-soft);
         }
-        .platform-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 1px 2px rgba(15, 41, 58, 0.05),
-                        0 24px 54px -18px rgba(15, 41, 58, 0.28);
-        }
-
-        /* The flagship's accent edge is a 3px fill. A 1px orange hairline on white
-           measures 2:1 and simply is not there. */
-        .flagship-full .platform-card::before {
+        .platform-card::after {
             content: "";
             position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 3px;
-            background: var(--accent);
+            top: 0; left: 0;
+            width: 100%; height: 1px;
+            background: linear-gradient(90deg, var(--accent), rgba(247, 150, 70, 0) 60%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.8s var(--ease-out);
         }
-
+        .platform-card:hover { border-color: var(--line-2); background: rgba(255, 255, 255, 0.055); }
+        .platform-card:hover::after { transform: scaleX(1); }
         .platform-card-tag {
             font-size: 10px;
-            letter-spacing: 0.22em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--accent-ink);
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
         .platform-card h3 {
             font-size: clamp(22px, 2.8vw, 38px);
@@ -483,33 +465,25 @@
             color: var(--ink);
             margin-bottom: 14px;
         }
-        .platform-card p { font-size: clamp(15px, 1.15vw, 17px); color: var(--body); max-width: 58ch; }
-
-        /* The three lines carry numbers, so they are set as specs rather than as
-           bullets. The old 6x1px dashes landed on fractional device pixels and
-           rendered at three different weights, which is what made the list read
-           as broken rather than quiet. */
-        .platform-specs {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: clamp(18px, 2.6vw, 40px);
-            margin-top: clamp(26px, 3.4vh, 40px);
-            padding-top: clamp(22px, 3vh, 32px);
-            border-top: 1px solid rgba(15, 41, 58, 0.12);
+        .platform-card p { font-size: 15px; color: var(--body); max-width: 62ch; }
+        .platform-card ul { list-style: none; margin-top: 22px; display: grid; gap: 10px; }
+        .platform-card li {
+            position: relative;
+            padding-left: 18px;
+            font-size: 14px;
+            color: var(--muted);
         }
-        .platform-specs li { display: flex; flex-direction: column; gap: 8px; }
-        .spec-figure {
-            font-size: clamp(24px, 2.5vw, 34px);
-            font-weight: 500;
-            line-height: 1;
-            letter-spacing: -0.03em;
-            color: var(--accent-deep);
-            font-variant-numeric: tabular-nums;
+        .platform-card li::before {
+            content: "";
+            position: absolute;
+            left: 0; top: 9px;
+            width: 6px; height: 1px;
+            background: var(--accent);
         }
-        .spec-label { font-size: 13.5px; line-height: 1.55; color: var(--muted); }
+        .flagship-full .platform-card { border-left: 1px solid var(--accent); }
 
         /* -------------------------------------------------------------- reveals */
+        /* ------------------------------------------------------------------ map */
         /* -------------------------------------------------------------- contact */
         .contact-band {
             padding-top: clamp(88px, 12vh, 168px);
@@ -525,7 +499,6 @@
             border: 1px solid var(--accent);
             border-radius: 999px;
             color: var(--accent-ink);
-            border-color: var(--accent-ink);
             text-decoration: none;
             font-size: 11px;
             font-weight: 500;
@@ -537,9 +510,9 @@
         .contact-cta::after { content: "\2192"; transition: transform 0.36s var(--ease-out); }
         .contact-cta:hover {
             background: var(--accent);
-            color: #1a1a1a;
+            color: #0a0a0a;
             border-color: var(--accent);
-            box-shadow: 0 14px 34px rgba(194, 98, 20, 0.24);
+            box-shadow: 0 14px 34px rgba(247, 150, 70, 0.30);
         }
         .contact-cta:hover::after { transform: translateX(5px); }
 
@@ -626,17 +599,6 @@
             .era-mid-line { width: auto; height: 1px; flex: 1; background: linear-gradient(90deg, transparent, var(--line-2), transparent); }
             .era-mid-mark { writing-mode: horizontal-tb; padding: 0 12px; }
 
-            .platform-specs { grid-template-columns: 1fr; gap: 0; }
-            .platform-specs li {
-                flex-direction: row;
-                align-items: baseline;
-                gap: 16px;
-                padding: 15px 0;
-                border-bottom: 1px solid rgba(15, 41, 58, 0.10);
-            }
-            .platform-specs li:last-child { border-bottom: none; padding-bottom: 0; }
-            .spec-figure { font-size: 24px; min-width: 106px; }
-
             .nav-toggle { display: flex; }
             .nav-links {
                 position: fixed;
@@ -645,7 +607,7 @@
                 align-items: flex-start;
                 gap: 4px;
                 padding: 24px var(--wrap-pad) 34px;
-                background: rgba(239, 247, 253, 0.97);
+                background: rgba(6, 7, 10, 0.97);
                 backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(20px);
                 border-bottom: 1px solid var(--line);
@@ -820,20 +782,11 @@
                 <div class="platform-card reveal">
                     <div class="platform-card-tag">The Flagship</div>
                     <h3>Metro-Edge Acquisition</h3>
-                    <p>Powered, entitled, metro-proximate sites acquired at brownfield basis, with interconnection signed before closing.</p>
-                    <ul class="platform-specs">
-                        <li>
-                            <span class="spec-figure">25-75 MW</span>
-                            <span class="spec-label">IT per site, versus 300-1,000+ MW hyperscale campuses</span>
-                        </li>
-                        <li>
-                            <span class="spec-figure">6-18 mo</span>
-                            <span class="spec-label">to revenue on existing power, shells, and permits</span>
-                        </li>
-                        <li>
-                            <span class="spec-figure">5-20 MW</span>
-                            <span class="spec-label">modular tranches added against demand</span>
-                        </li>
+                    <p>Powered, entitled, metro-proximate sites acquired at brownfield basis — with interconnection signed before closing.</p>
+                    <ul>
+                        <li>25–75 MW IT per site, versus 300–1,000+ MW hyperscale campuses</li>
+                        <li>6–18 months to revenue on existing power, shells, and permits</li>
+                        <li>Modular 5–20 MW tranches added against demand</li>
                     </ul>
                 </div>
             </div>
@@ -962,7 +915,7 @@
                 <hr class="rule reveal">
             </div>
             <h2 class="statement rt">Powered land, metro proximity, and speed to revenue.</h2>
-            <p class="body-copy reveal">For site opportunities, capital partnerships, or the full platform materials, reach us at <a href="mailto:info@edgeflex.io" style="color: var(--accent-ink); text-decoration: none;">info@edgeflex.io</a>.</p>
+            <p class="body-copy reveal">For site opportunities, capital partnerships, or the full platform materials, reach us at <a href="mailto:info@edgeflex.io" style="color: var(--accent); text-decoration: none;">info@edgeflex.io</a>.</p>
             <a class="contact-cta reveal d1" href="mailto:info@edgeflex.io">Get in Touch</a>
         </section>
     </main>
