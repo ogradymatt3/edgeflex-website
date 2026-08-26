@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EdgeFlex — Metro-edge infrastructure for the inference era</title>
+    <meta name="description" content="EdgeFlex develops, owns, and operates 25–75 MW metro-edge data centers built for the inference era." />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="EdgeFlex — Metro-edge infrastructure for the inference era" />
+    <meta property="og:description" content="A developer, owner, and operator of 25–75 MW metro-edge data centers with power in hand." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="EdgeFlex — Metro-edge infrastructure for the inference era" />
+    <meta name="twitter:description" content="A developer, owner, and operator of 25–75 MW metro-edge data centers with power in hand." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="/assets/index-Ac4m9Ft7.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Ze8j4Rk3.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      (function () {
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        function scrollToEl(el) {
+          var target = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 24);
+          if (reduce) { window.scrollTo(0, target); return; }
+          var start = window.scrollY, delta = target - start, t0 = performance.now(), ms = 620;
+          (function step(now) {
+            var p = Math.min(1, (now - t0) / ms);
+            window.scrollTo(0, start + delta * (1 - Math.pow(1 - p, 3)));
+            if (p < 1) requestAnimationFrame(step);
+          })(t0);
+          setTimeout(function () {
+            if (Math.abs(window.scrollY - target) > 2) window.scrollTo(0, target);
+          }, ms + 120);
+        }
+        document.addEventListener("click", function (e) {
+          var a = e.target.closest && e.target.closest('a[href^="#"]');
+          if (!a) return;
+          var id = a.getAttribute("href").slice(1);
+          if (!id) return;
+          var el = document.getElementById(id);
+          if (!el) return;
+          e.preventDefault();
+          scrollToEl(el);
+          history.replaceState(null, "", "#" + id);
+        });
+      })();
+    </script>
+  </body>
+</html>
