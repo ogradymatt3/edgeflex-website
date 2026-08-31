@@ -19,9 +19,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script type="module" crossorigin src="/assets/index-Bn6q2Xw4.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Ze8j4Rk3.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-esSBFOP9.css">
   </head>
   <body>
+    <!-- Cinematic film ground: fixed behind every page, and deliberately
+         outside #root so it survives client-side route changes. Sources are
+         set by the rotator below; two layers so clips can crossfade. -->
+    <div id="ef-film" aria-hidden="true">
+      <video class="ef-layer is-on" loop muted playsinline preload="auto"
+             disablepictureinpicture disableremoteplayback
+             poster="https://assets.mixkit.co/videos/28351/28351-thumb-720-0.jpg"></video>
+      <video class="ef-layer" loop muted playsinline preload="none"
+             disablepictureinpicture disableremoteplayback></video>
+    </div>
+    <div id="ef-film-scrim" aria-hidden="true"></div>
     <div id="root"></div>
     <script>
       (function () {
@@ -50,6 +61,112 @@
           scrollToEl(el);
           history.replaceState(null, "", "#" + id);
         });
+      })();
+    </script>
+    <script>
+      // The film ground: a slow rotation through power and compute plates,
+      // crossfaded. Alternating the two is the whole EdgeFlex thesis, so the
+      // background carries it rather than just looking cinematic.
+      (function () {
+        var FILM = [
+          "28351", // transmission lines across a field at sunset
+          "4359",  // petrochemical plant at night
+          "4234",  // offshore wind farm out at sea
+          "48353", // pumpjacks working an oil field
+          "17024", // molten metal and steam in a furnace
+          "25119", // flying through a heavy industrial landscape
+          "30219"  // transmission poles and towers, low view
+        ];
+        var HOLD = 13000, FADE = 1600;
+        var box = document.getElementById("ef-film");
+        if (!box) return;
+        var layers = box.querySelectorAll("video");
+        if (layers.length < 2) return;
+
+        function url(id) { return "https://assets.mixkit.co/videos/" + id + "/" + id + "-720.mp4"; }
+        function start(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+
+        var i = 0, front = 0, timer = 0;
+        layers[0].src = url(FILM[0]);
+        start(layers[0]);
+
+        // Anything that quietly stops the front layer (tab throttling, a
+        // stalled segment) gets picked back up by the sweep below.
+        window.__efFilmFront = function () { return layers[front]; };
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        function advance() {
+          var back = layers[1 - front], swapped = false;
+          i = (i + 1) % FILM.length;
+          back.src = url(FILM[i]);
+          back.load();
+          function swap() {
+            if (swapped) return;
+            swapped = true;
+            back.removeEventListener("canplay", swap);
+            start(back);
+            back.classList.add("is-on");
+            var old = layers[front];
+            old.classList.remove("is-on");
+            setTimeout(function () { old.pause(); }, FADE + 120);
+            front = 1 - front;
+            timer = setTimeout(advance, HOLD);
+          }
+          back.addEventListener("canplay", swap);
+          setTimeout(swap, 6000); // never stall the rotation on a slow clip
+        }
+        timer = setTimeout(advance, HOLD);
+
+        document.addEventListener("visibilitychange", function () {
+          if (document.hidden) {
+            clearTimeout(timer);
+            layers[0].pause(); layers[1].pause();
+          } else {
+            start(layers[front]);
+            clearTimeout(timer);
+            timer = setTimeout(advance, HOLD);
+          }
+        });
+      })();
+
+      // The page ground is the only film now. Every other <video> the bundle
+      // still renders belongs to a retired section and is hidden in CSS, so
+      // strip it the moment React inserts it -- otherwise the browser still
+      // pulls a poster and metadata for five clips nobody will ever see.
+      (function () {
+        function strip() {
+          var vids = document.querySelectorAll("video");
+          for (var i = 0; i < vids.length; i++) {
+            var v = vids[i];
+            if (v.closest("#ef-film")) continue;
+            var s = v.querySelector("source");
+            if (s) s.remove();
+            if (v.getAttribute("src") || v.getAttribute("poster") || s) {
+              v.removeAttribute("src");
+              v.removeAttribute("poster");
+              v.removeAttribute("autoplay");
+              try { v.pause(); v.load(); } catch (e) {}
+            }
+          }
+        }
+        strip();
+        new MutationObserver(strip).observe(document.documentElement, { childList: true, subtree: true });
+
+        // Keep the visible film layer alive if the tab throttles it off.
+        function heal() {
+          if (document.hidden) return;
+          var layers = document.querySelectorAll("#ef-film video");
+          for (var i = 0; i < layers.length; i++) {
+            var v = layers[i];
+            if (v.classList.contains("is-on") && v.paused && v.src) {
+              var q = v.play(); if (q && q.catch) q.catch(function () {});
+            }
+          }
+        }
+        addEventListener("visibilitychange", heal);
+        setInterval(heal, 4000);
+        heal();
       })();
     </script>
   </body>
