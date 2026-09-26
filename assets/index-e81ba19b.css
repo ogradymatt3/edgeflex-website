@@ -166,3 +166,11 @@ html,body{background:#0a0a0a}
 .edge-nav-index{display:none}
 .edge-eyebrow{font-weight:600;letter-spacing:.16em}
 .edge-button,.edge-text-link,.edge-hero-learn,.edge-footer-links{font-weight:600;letter-spacing:.12em}
+
+/* 14 - let the film's color back in (was saturate(.18)).
+       Type and UI stay monochrome; only the footage carries hue.
+       Veils thin slightly so the color reads through the sections. */
+#ef-film video{filter:saturate(.9)contrast(1.06)brightness(.95)}
+.edge-section.edge-home-intro,.edge-film-feature,.edge-film-grid-section,
+.edge-section.edge-selection,.edge-section.edge-pipeline{background:#0a0a0a9e}
+.edge-home-feature,.edge-section.edge-execution{background:#000000b3}
