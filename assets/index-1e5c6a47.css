@@ -179,3 +179,8 @@ html,body{background:#0a0a0a}
        just "EdgeFlex" set a touch larger and tighter. Header and footer. */
 .edge-brand-mark{display:none}
 .edge-brand{gap:0;font-size:22px;font-weight:700;letter-spacing:-.03em;line-height:1}
+
+/* 16 - Platform hero: the "Site dossier" card is gone, and with it the whole
+       right column (its film was already retired). Copy runs full width. */
+.edge-dossier,.edge-reveal:has(>.edge-platform-hero-visuals){display:none}
+.edge-page-hero-grid:has(.edge-platform-hero-visuals){grid-template-columns:1fr}
