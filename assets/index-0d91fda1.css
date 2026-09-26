@@ -174,3 +174,8 @@ html,body{background:#0a0a0a}
 .edge-section.edge-home-intro,.edge-film-feature,.edge-film-grid-section,
 .edge-section.edge-selection,.edge-section.edge-pipeline{background:#0a0a0a9e}
 .edge-home-feature,.edge-section.edge-execution{background:#000000b3}
+
+/* 15 - wordmark only, Blackstone-style: no circled E/ glyph,
+       just "EdgeFlex" set a touch larger and tighter. Header and footer. */
+.edge-brand-mark{display:none}
+.edge-brand{gap:0;font-size:22px;font-weight:700;letter-spacing:-.03em;line-height:1}
