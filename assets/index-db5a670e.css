@@ -157,3 +157,12 @@ html,body{background:#0a0a0a}
 .edge-text-link:hover{color:#fff}
 .edge-stack-card{border-top-color:#ffffff8c}
 .edge-map-pin,.edge-road,.edge-substation{color:#fff}
+
+/* 13 - labels in the house sans, not a terminal mono.
+       DM Mono was never loaded, so every small label fell back to Consolas.
+       Labels now use Manrope in tracked caps; the nav drops its 01/02/03 counters. */
+:root{--app-font-mono:"Manrope",sans-serif}
+.edge-nav-links{font-size:11px;font-weight:600;letter-spacing:.14em}
+.edge-nav-index{display:none}
+.edge-eyebrow{font-weight:600;letter-spacing:.16em}
+.edge-button,.edge-text-link,.edge-hero-learn,.edge-footer-links{font-weight:600;letter-spacing:.12em}
