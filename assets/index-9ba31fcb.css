@@ -184,3 +184,16 @@ html,body{background:#0a0a0a}
        right column (its film was already retired). Copy runs full width. */
 .edge-dossier,.edge-reveal:has(>.edge-platform-hero-visuals){display:none}
 .edge-page-hero-grid:has(.edge-platform-hero-visuals){grid-template-columns:1fr}
+
+
+/* 17 - off stealth (10/24/26): founder block replaces the anonymous
+       "founding team" paragraph in Platform / Execution; Matt's line on Contact. */
+.edge-founder{display:flex;gap:36px;align-items:center}
+.edge-founder-photo{width:240px;height:240px;border-radius:50%;object-fit:cover;flex:none;filter:grayscale(.15)}
+.edge-founder-name{margin:4px 0 2px;font-size:22px;font-weight:700;letter-spacing:-.02em;color:#fff}
+.edge-founder-title{display:block;margin-bottom:14px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#ffffffb3}
+.edge-founder .edge-copy{margin:0}
+.edge-founder-contact{margin-top:22px;font-size:14px;line-height:1.7;color:#ffffffb3}
+.edge-founder-contact a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:640px){.edge-founder{flex-direction:column;gap:18px}.edge-founder-photo{width:180px;height:180px}}
+.edge-founder-email{display:inline-block;margin-top:16px;font-size:14px;font-weight:600;letter-spacing:.02em;color:#fff;text-decoration:underline;text-underline-offset:4px}
