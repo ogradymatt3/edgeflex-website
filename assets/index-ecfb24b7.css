@@ -197,3 +197,11 @@ html,body{background:#0a0a0a}
 .edge-founder-contact a{color:#fff;text-decoration:underline;text-underline-offset:3px}
 @media (max-width:640px){.edge-founder{flex-direction:column;gap:18px}.edge-founder-photo{width:180px;height:180px}}
 .edge-founder-email{display:inline-block;margin-top:16px;font-size:14px;font-weight:600;letter-spacing:.02em;color:#fff;text-decoration:underline;text-underline-offset:4px}
+
+
+/* 18 - career timeline under the founder bio (10/26/26), from Matt's LinkedIn
+       experience. Year label over each line, firm bold, role muted. */
+.edge-founder-career{list-style:none;margin:20px 0 0;padding:16px 0 0;border-top:1px solid #ffffff2e;display:grid;gap:12px}
+.edge-founder-career li{display:grid;grid-template-columns:1fr;gap:1px;font-size:14px;line-height:1.45;color:#ffffffb3}
+.edge-founder-years{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#ffffff8c;padding-top:2px}
+.edge-founder-role strong{color:#fff;font-weight:700}
